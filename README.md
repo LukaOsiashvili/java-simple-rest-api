@@ -1,1 +1,1 @@
-# java-simple-rest-api
+Simple Rest Api
