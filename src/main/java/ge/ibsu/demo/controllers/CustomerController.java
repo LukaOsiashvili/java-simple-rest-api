@@ -1,13 +1,11 @@
 package ge.ibsu.demo.controllers;
 
+import ge.ibsu.demo.dto.AddCustomer;
 import ge.ibsu.demo.entities.Customer;
 import ge.ibsu.demo.repositories.CustomerRepository;
 import ge.ibsu.demo.services.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -31,6 +29,21 @@ public class CustomerController {
     @RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = {"application/json"})
     public Customer getById(@PathVariable Long id){
         return customerService.getById(id);
+    }
+
+    @RequestMapping(value = "/add", method = RequestMethod.POST, produces = {"application/json"})
+    public Customer add(@RequestBody AddCustomer addCustomer){
+        return customerService.addEditCustomer(addCustomer, null);
+    }
+
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE, produces = {"application/json"})
+    public Boolean delete(@PathVariable Long id){
+        return customerService.deleteCustomer(id);
+    }
+
+    @RequestMapping(value = "/{id}", method = RequestMethod.PUT, produces = {"application/json"})
+    public Customer edit(@RequestBody AddCustomer addCustomer, @PathVariable Long id){
+        return customerService.addEditCustomer(addCustomer, id);
     }
 
 }
