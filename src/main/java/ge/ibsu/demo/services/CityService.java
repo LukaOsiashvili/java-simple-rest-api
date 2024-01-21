@@ -45,6 +45,7 @@ public class CityService {
         return cityRepository.save(city);
     }
 
+    @Transactional
     public City addEditCity(AddCity addCity, Long id){
 
         City city = new City();
