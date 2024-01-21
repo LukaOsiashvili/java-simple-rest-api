@@ -5,6 +5,8 @@ public class AddAddress {
     private String address;
     private String postalCode;
 
+    private AddCity city;
+
     public String getAddress() {
         return address;
     }
@@ -19,5 +21,13 @@ public class AddAddress {
 
     public void setPostalCode(String postalCode) {
         this.postalCode = postalCode;
+    }
+
+    public AddCity getCity() {
+        return city;
+    }
+
+    public void setCity(AddCity city) {
+        this.city = city;
     }
 }

@@ -3,6 +3,7 @@ package ge.ibsu.demo.services;
 
 import ge.ibsu.demo.dto.AddAddress;
 import ge.ibsu.demo.entities.Address;
+import ge.ibsu.demo.entities.City;
 import ge.ibsu.demo.repositories.AddressRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,12 +15,13 @@ import java.util.List;
 public class AddressService {
 
     private final AddressRepository addressRepository;
-
+    private final CityService cityService;
 
 
     @Autowired
-    public AddressService(AddressRepository addressRepository) {
+    public AddressService(AddressRepository addressRepository, CityService cityService) {
         this.addressRepository = addressRepository;
+        this.cityService = cityService;
     }
 
     public List<Address> getAll(){
@@ -37,6 +39,9 @@ public class AddressService {
 
         address.setAddress(addAddress.getAddress());
         address.setPostalCode(addAddress.getPostalCode());
+
+        City city = cityService.getCity(addAddress.getCity());
+        address.setCity(city);
 
         return addressRepository.save(address);
     }
